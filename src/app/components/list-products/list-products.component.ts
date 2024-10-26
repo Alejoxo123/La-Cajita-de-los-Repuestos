@@ -52,17 +52,50 @@ ngOnInit(): void {
     })
   }
   
+
+
+
+
   // Método para actualizar la lista con los productos filtrados por nombre
   searchProducts() {
     this.loading = true;
-    if (this.searchTerm ==  '') {
-      this.toastr.info('Ingresa una busqueda','valor  vacio');
 
-      this.getListProducts();  
-    }else
-    this.productService.searchProductsByName(this.searchTerm).subscribe((data) => {
-      this.listProducts = data.products;
-      this.loading = false;
-    })
-  }
+    // Validar si el término de búsqueda está vacío
+    if (this.searchTerm.trim() === '') {
+        this.toastr.error('Ingresa un valor para buscar', 'Valor vacío');
+        this.getListProducts(); // Si no hay búsqueda, mostrar todos los productos
+        this.loading = false;
+        return;
+    }
+
+    // Validar longitud mínima del término de búsqueda
+    if (this.searchTerm.trim().length < 3) {
+        this.toastr.warning('El término de búsqueda debe tener al menos 3 caracteres', 'Búsqueda demasiado corta');
+        this.loading = false;
+        return;
+    }
+
+    // Si pasa las validaciones, realizar la búsqueda
+    this.productService.searchProductsByName(this.searchTerm).subscribe({
+        next: (data) => {
+            if (data.products.length === 0) {
+                // Si no se encuentran productos
+                this.toastr.info('No se encontraron productos con ese nombre', 'Sin resultados');
+            } else {
+                this.listProducts = data.products; // Actualizar la lista de productos
+            }
+            this.loading = false;
+        },
+        error: (error) => {
+            if (error.status === 404) {
+                // Manejar el error 404 que viene desde el backend
+                this.toastr.error('No se encontraron productos con ese nombre', 'Sin resultados');
+            } else {
+                this.toastr.error('Ocurrió un error al buscar productos', 'Error');
+            }
+            this.loading = false;
+        }
+    });
+}
+
 }
