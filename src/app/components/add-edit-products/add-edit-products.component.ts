@@ -6,79 +6,51 @@ import { Product } from '../../interfaces/product';
 import { ProductService } from '../../services/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProgressBarComponent } from "../../shared/progress-bar/progress-bar.component";
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-add-edit-products',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, ProgressBarComponent],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, ProgressBarComponent, MatTableModule],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './add-edit-products.component.html',
   styleUrl: './add-edit-products.component.css'
 })
 export class AddEditProductsComponent {
 
-  form: FormGroup;
   loading: boolean = false;
-  id: number;
-  operacion: string = 'Agregar '
+  facturaForm: FormGroup;
+  productoForm: FormGroup;
+  productos: any[] = [];
+  displayedColumns: string[] = ['codigo', 'nombre', 'descripcion', 'referencia', 'cantidad', 'precioUnitario'];
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private toastr: ToastrService, private router: Router, private aRouter: ActivatedRoute) {
-    this.form = this.fb.group({
-      name: ['', Validators.required],
-      description: ['',Validators.required],
-      price: [null,Validators.required],
-      stock: [null,Validators.required]
-    })
-    this.id = Number(aRouter.snapshot.paramMap.get('id'))
+  constructor(private fb: FormBuilder) {
+    this.facturaForm = this.fb.group({
+      numeroFactura: ['', Validators.required],
+      fecha: ['', Validators.required],
+      proveedor: ['', Validators.required]
+    });
+
+    this.productoForm = this.fb.group({
+      codigo: ['', Validators.required],
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      referencia: ['', Validators.required],
+      cantidad: [0, [Validators.required, Validators.min(1)]],
+      precioUnitario: [0, [Validators.required, Validators.min(0.01)]]
+    });
   }
 
-  ngOnInit(): void{
-    if(this.id != 0){
-      this.operacion = 'Editar '
-      this.getProduct(this.id);
+  agregarProducto() {
+    if (this.productoForm.valid) {
+      this.productos.push(this.productoForm.value);
+      this.productoForm.reset();
     }
   }
-  getProduct(id: number){
-    this.loading = true;
-    this.productService.getProduct(id).subscribe((data:Product) =>{
-      this.loading = false;
-      this.form.setValue({
-        name: data.name,
-        description: data.description,
-        price: data.price,
-        stock: data.stock
-      })
-    })
-  }
 
-  addProduct() {
-    const product: Product = {
-      name: this.form.value.name,
-      description: this.form.value.description,
-      price: this.form.value.price,
-      stock: this.form.value.stock
-    }
-    this.loading = true;
-
-    if (this.id !== 0) {
-      //Es editar
-      this.productService.updateProduct(this.id, product).subscribe(() => {
-        this.toastr.info(' El producto ' + product.name + ' fue Actualisado con exito', 'Producto Actualizado');
-        this.loading = false;
-        this.router.navigate(['/']);
-      })
-    } else {
-      //Es Agregar
-      this.loading = true;
-      product.id = this.id;
-      this.productService.saveProduct(product).subscribe(() => {
-        this.toastr.success(' El producto ' + product.name + ' fue registrado con exito', 'Producto Registrado');
-        this.loading = false;
-        this.router.navigate(['/']);
-      });
-    }
-
-
+  guardarProductos() {
+    console.log('Productos añadidos al inventario:', this.productos);
+    // Lógica para guardar en la base de datos o enviar a la API
   }
 
 }

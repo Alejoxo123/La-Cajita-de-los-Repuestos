@@ -1,0 +1,22 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" [opened]="isSidebarOpen">
+      <!-- Contenido de la barra lateral -->
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home">Inicio</a>
+        <a mat-list-item routerLink="/productos">Productos</a>
+        <a mat-list-item routerLink="/puntoVenta">Punto de Venta</a>
+        <a mat-list-item routerLink="/detalleVenta">Detalle de Venta</a>
+        <a mat-list-item routerLink="/IngresarProductos">Ingresos</a>
+        <a mat-list-item routerLink="/contacto">Contacto</a>
+      </mat-nav-list>
+    </mat-sidenav>
+     <!-- Contenido principal -->
+     <mat-sidenav-content>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+   
+  

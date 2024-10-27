@@ -5,22 +5,27 @@ import { ListProductsComponent } from '../list-products/list-products.component'
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SidebarService } from '../../services/sidebar.service';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, MatListModule, MatSidenavModule]
 })
 export class NavbarComponent {
   searchTerm: string = '';  // Almacena el término de búsqueda
   listProducts: Product[] = [];  // Almacena los productos que coinciden con la búsqueda
   @ViewChild(ListProductsComponent) listProductsComponent!: ListProductsComponent;
   
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private router: Router, private sidebarService: SidebarService) { }
 
-
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar();
+  }
 
   searchProducts(event: Event) {
     event.preventDefault();

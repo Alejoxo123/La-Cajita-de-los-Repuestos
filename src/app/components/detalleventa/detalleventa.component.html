@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <h2 class="text-center">Buscar Detalles de Venta</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <input 
+                type="text" 
+                [(ngModel)]="codigoVenta" 
+                placeholder="Ingrese el código de la venta" 
+                class="form-control" 
+                (keyup.enter)="buscarVentas()">
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary" (click)="buscarVentas()">Buscar</button>
+        </div>
+    </div>
+
+    <table class="table table-striped" *NgIf="ventas.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">Código Venta</th>
+                <th scope="col">Total</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Vendedor</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *NgFor="let venta of ventas" (click)="verDetalles(venta.id)">
+                <td>{{ venta.codigo }}</td>
+                <td>{{ venta.total }}</td>
+                <td>{{ venta.fecha   }}</td>
+                <td>{{ venta.vendedor }}</td>
+                <td><button class="btn btn-info btn-sm">Ver Detalles</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *NgIf="ventas.length === 0" class="alert alert-warning" role="alert">
+        No se encontraron ventas para el código ingresado.
+    </div>
+</div>
+

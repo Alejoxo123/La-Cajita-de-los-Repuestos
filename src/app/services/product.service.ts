@@ -11,8 +11,19 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
+  //Busca Por codigo
+  searchProductsBycodigo(codigo: number):  Observable<{ products: Product[] }> {
+    return this.http.get<{ products: Product[] }>(`${this.apiUrl}/searchcode?codigo=${codigo}`);
+  }
+
+  //Busca por referencia
+  searchProductsByreferencia(referencia: string):   Observable<{ products: Product[] }> {
+    return this.http.get<{ products: Product[] }>(`${this.apiUrl}/searchreference?referencia=${referencia}`);
+  }
+
+  //Busca por nombre
   searchProductsByName(name: string): Observable<{ products: Product[] }> {
-    return this.http.get<{ products: Product[] }>(`${this.apiUrl}/search?name=${name}`);
+    return this.http.get<{ products: Product[] }>(`${this.apiUrl}/searchname?name=${name}`);
   }
   // Método para obtener los productos
   getProducts(): Observable<{ ListProducts: Product[] }> {

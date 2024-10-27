@@ -1,0 +1,60 @@
+<div class="container mt-4">
+    <h2 class="text-center">Punto de Venta</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fecha" required>
+        </div>
+        <div class="col-md-6">
+            <label for="cliente" class="form-label">Cliente</label>
+            <select class="form-select" id="cliente" required>
+                <option value="">Seleccione un cliente</option>
+                <option value="1">Cliente 1</option>
+                <option value="2">Cliente 2</option>
+                <option value="3">Cliente 3</option>
+            </select>
+        </div>
+    </div>
+  
+    <div class="row mb-4">
+      <div class="col-md-6 offset-md-3">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Ingrese el código del producto" [(ngModel)]="searchCodigo" required>
+          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="cantidadProducto" required>
+          <button class="btn btn-primary" type="button" (click)="agregarProducto()">Añadir</button>
+        </div>
+      </div>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Precio Unitario</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio Total</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of listProducts">
+          <td>{{ producto.codigo }}</td>
+          <td>{{ producto.description }}</td>
+          <td>{{ producto.price | currency }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>{{ producto.precioTotal | currency }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="eliminarProducto(producto)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="d-flex justify-content-between">
+      <h5>Total de la Venta: <span>{{ totalVenta | currency }}</span></h5>
+      <button class="btn btn-success" type="button">Liquidar</button>
+    </div>
+  </div>
+  
