@@ -9,42 +9,42 @@ import { Product } from '../interfaces/product';
 export class ProductService {
   private apiUrl = 'http://localhost:3000/api/productos';  // URL de tu API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  //Busca Por codigo
-  searchProductsBycodigo(codigo: number):  Observable<{ products: Product[] }> {
+
+  searchProductsBycodigo(codigo: number): Observable<{ products: Product[] }> {
     return this.http.get<{ products: Product[] }>(`${this.apiUrl}/searchcode?codigo=${codigo}`);
   }
 
-  //Busca por referencia
-  searchProductsByreferencia(referencia: string):   Observable<{ products: Product[] }> {
+
+  searchProductsByreferencia(referencia: string): Observable<{ products: Product[] }> {
     return this.http.get<{ products: Product[] }>(`${this.apiUrl}/searchreference?referencia=${referencia}`);
   }
 
-  //Busca por nombre
+
   searchProductsByName(name: string): Observable<{ products: Product[] }> {
     return this.http.get<{ products: Product[] }>(`${this.apiUrl}/searchname?name=${name}`);
   }
-  // Método para obtener los productos
+
   getProducts(): Observable<{ ListProducts: Product[] }> {
     return this.http.get<{ ListProducts: Product[] }>(this.apiUrl);
   }
 
-  deleteProduct( id: number): Observable<void>{
+  deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  saveProduct(product: Product): Observable<void>{
-    return this.http.post<void>(this.apiUrl, product);
+  saveProduct(products: Product[]): Observable<void> {
+    return this.http.post<void>(this.apiUrl + '/crear', products);
   }
 
-  getProduct(id: number): Observable<Product>{
+  getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  updateProduct(id: number, product: Product): Observable<void>{
+  updateProduct(id: number, product: Product): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, product);
   }
 
-  
+
 }

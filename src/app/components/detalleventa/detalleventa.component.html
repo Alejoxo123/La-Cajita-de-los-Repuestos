@@ -1,43 +1,62 @@
-<div class="container mt-4">
-    <h2 class="text-center">Buscar Detalles de Venta</h2>
+<div class="container central-container mt-5 p-4">
+  <h2 class="text-center text-primary mb-4">Buscar Detalles de Venta</h2>
 
-    <div class="row mb-4">
-        <div class="col-md-6">
-            <input 
-                type="text" 
-                [(ngModel)]="codigoVenta" 
-                placeholder="Ingrese el código de la venta" 
-                class="form-control" 
-                (keyup.enter)="buscarVentas()">
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-primary" (click)="buscarVentas()">Buscar</button>
-        </div>
+  <div class="row mb-4 justify-content-center align-items-center">
+    <div class="col-md-6">
+      <input type="text" [(ngModel)]="codigoVenta" placeholder="Ingrese el código de la venta" class="form-control"
+        (keyup.enter)="buscarVentas()">
     </div>
+    <div class="col-md-3">
+      <button class="btn btn-secondary w-100" (click)="buscarVentas()">Buscar</button>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered" *ngIf="ventas.length > 0">
+    <thead class="table-primary">
+      <tr>
+        <th scope="col">Código Venta</th>
+        <th scope="col">Total</th>
+        <th scope="col">Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas" class="table-light">
+        <td>{{ venta.id }}</td>
+        <td>{{ venta.total | currency }}</td>
+        <td>{{ venta.fecha | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <table class="table table-striped" *NgIf="ventas.length > 0">
-        <thead>
-            <tr>
-                <th scope="col">Código Venta</th>
-                <th scope="col">Total</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Vendedor</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *NgFor="let venta of ventas" (click)="verDetalles(venta.id)">
-                <td>{{ venta.codigo }}</td>
-                <td>{{ venta.total }}</td>
-                <td>{{ venta.fecha   }}</td>
-                <td>{{ venta.vendedor }}</td>
-                <td><button class="btn btn-info btn-sm">Ver Detalles</button></td>
-            </tr>
-        </tbody>
+  <div *ngIf="ventaDetalles" class="mt-4">
+    <h3 class="text-center">Detalles de la Venta</h3>
+    <p><strong>Código de Venta:</strong> {{ ventaDetalles.venta.id }}</p>
+    <p><strong>Cliente ID:</strong> {{ ventaDetalles.venta.cliente_id }}</p>
+    <p><strong>Total:</strong> {{ ventaDetalles.venta.total | currency }}</p>
+    <p><strong>Fecha:</strong> {{ ventaDetalles.venta.fecha | date: 'short' }}</p>
+
+    <h4>Productos Vendidos:</h4>
+    <table class="table table-bordered">
+      <thead class="table-secondary">
+        <tr>
+          <th scope="col">Producto</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio Unitario</th>
+          <th scope="col">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of ventaDetalles.detalles">
+          <td>{{ detalle.nombre_producto }}</td>
+          <td>{{ detalle.descripcion_producto }}</td>
+          <td>{{ detalle.cantidad }}</td>
+          <td>{{ detalle.precio_unitario | currency }}</td>
+          <td>{{ detalle.subtotal | currency }}</td>
+        </tr>
+      </tbody>
     </table>
-
-    <div *NgIf="ventas.length === 0" class="alert alert-warning" role="alert">
-        No se encontraron ventas para el código ingresado.
-    </div>
+  </div>
+  <div *ngIf="ventas.length === 0" class="alert alert-warning text-center mt-4" role="alert">
+    No se encontraron ventas para el código ingresado.
+  </div>
 </div>
-

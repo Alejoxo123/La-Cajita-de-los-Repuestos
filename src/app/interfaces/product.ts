@@ -1,10 +1,8 @@
-export interface Product {
-    products: any;
-    id?: number;
+export interface Product { 
+    codigo?: number;
     name: string;
     description: string;
     price: number;
     stock: number;
-    codigo: number;
     referencia: string;
 }

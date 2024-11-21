@@ -1,104 +1,54 @@
 <app-progress-bar *ngIf="loading"></app-progress-bar>
-<div *ngIf="!loading" class="container">
-  <div class="title">
-    <h4>Lista de Productos </h4>
+<div *ngIf="!loading" class="container central-container mt-5 p-4">
+    <h4 class="text-center text-primary mb-4">Lista de Productos</h4>
 
-    <div class="row mb-3 align-items-end">
-      <div class="col-md-4">
-        <form class="d-flex" (submit)="searchProductsCode()">
-          <label for="codigo-search" class="form-label">Código</label>
-          <input class="form-control me-sm-2" [(ngModel)]="searchCodigo" name="search" type="search" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-      <div class="col-md-4">
-        <form class="d-flex" (submit)="searchProductsReference()">
-          <label for="referencia-search" class="form-label">Referencia</label>
-          <input class="form-control me-sm-2" [(ngModel)]="searchReferencia" name="search" type="search" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-      <div class="col-md-4">
-        <form class="d-flex" (submit)="searchProductsName()">
-          <label for="nombre-search" class="form-label">Nombre</label>
-          <input class="form-control me-sm-2" [(ngModel)]="searchTerm" name="search" type="search" placeholder="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
+    <div class="row mb-4 align-items-end">
+        <div class="col-md-4">
+            <form class="d-flex align-items-center" (submit)="searchProductsCode()">
+                <label for="codigo-search" class="form-label text-info me-2">Código</label>
+                <input class="form-control me-2" [(ngModel)]="searchCodigo" name="search" type="search"
+                    placeholder="Buscar">
+                <button class="btn btn-secondary" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form class="d-flex align-items-center" (submit)="searchProductsReference()">
+                <label for="referencia-search" class="form-label text-info me-2">Referencia</label>
+                <input class="form-control me-2" [(ngModel)]="searchReferencia" name="search" type="search"
+                    placeholder="Buscar">
+                <button class="btn btn-secondary" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form class="d-flex align-items-center" (submit)="searchProductsName()">
+                <label for="nombre-search" class="form-label text-info me-2">Nombre</label>
+                <input class="form-control me-2" [(ngModel)]="searchTerm" name="search" type="search"
+                    placeholder="Buscar">
+                <button class="btn btn-secondary" type="submit">Buscar</button>
+            </form>
+        </div>
     </div>
-
-  </div>
-  <br><br>
-  <table *ngIf="listProducts.length > 0" class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Codigo</font>
-          </font>
-        </th>
-        <th scope="col">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Nombre</font>
-          </font>
-        </th>
-        <th scope="col">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Descripcion</font>
-          </font>
-        </th>
-        <th scope="col">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Precio</font>
-          </font>
-        </th>
-        <th scope="col">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">stock</font>
-          </font>
-        </th>
-        <th scope="col">
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">Referencia</font>
-          </font>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of listProducts" class="table-active">
-        <td>
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">{{ item.codigo }}</font>
-          </font>
-        </td>
-        <td>
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">{{ item.name }}</font>
-          </font>
-        </td>
-        <td>
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">{{ item.description }}</font>
-          </font>
-        </td>
-
-        <td>
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">{{ item.price | currency }}</font>
-          </font>
-        </td>
-        <td>
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">{{ item.stock }}</font>
-          </font>
-        </td>
-        <td>
-          <font style="vertical-align: inherit;">
-            <font style="vertical-align: inherit;">{{ item.referencia }}</font>
-          </font>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 *ngIf="listProducts.length == 0">No hay Productos Para mostrar</h5>
+    <table *ngIf="listProducts.length > 0" class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Referencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listProducts" class="table-light">
+                <td>{{ item.codigo }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.price | currency }}</td>
+                <td>{{ item.stock }}</td>
+                <td>{{ item.referencia }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h5 *ngIf="listProducts.length == 0" class="text-center text-danger mt-4">Ingresa una Busqueda</h5>
 </div>

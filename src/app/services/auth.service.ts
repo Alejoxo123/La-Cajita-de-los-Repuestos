@@ -12,7 +12,7 @@ export class AuthServiceService {
   constructor(private http:  HttpClient) { }
 
   loginUser(email: string, password: string): Observable<{ token: string }> {
-    const loginData = { email, password }; // Cambia "username" por "email"
+    const loginData = { email, password }; 
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, loginData);
   }
   

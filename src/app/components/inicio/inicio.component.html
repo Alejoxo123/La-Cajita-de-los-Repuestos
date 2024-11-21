@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="text-center mb-4">
+    <h1 class="display-5">Bienvenido</h1>
+    <p class="lead">Tu sistema de punto de venta de confianza</p>
+  </div>
+  <div class="row text-center mb-4">
+    <div class="col-md-4">
+      <div class="card border-primary">
+        <div class="card-body">
+          <h5 class="card-title">Ventas de Hoy</h5>
+          <p class="card-text h4">$15,000</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-warning">
+        <div class="card-body">
+          <h5 class="card-title">Inventario Bajo</h5>
+          <p class="card-text h4">5 productos</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-success">
+        <div class="card-body">
+          <h5 class="card-title">Productos Vendidos Hoy</h5>
+          <p class="card-text h4">120 artículos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mb-4">
+    <a href="#" class="btn btn-primary btn-lg mx-2" (click)="nuevaVenta()">Nueva Venta</a>
+    <a href="#" class="btn btn-info btn-lg mx-2" (click)="gestionarInventario()">Gestionar Inventario</a>
+    <a href="#" class="btn btn-secondary btn-lg mx-2" (click)="verHistorial()">Historial de Ventas</a>
+    <a href="#" class="btn btn-warning btn-lg mx-2" (click)="consultarClientes()">Clientes</a>
+  </div>
+  <div class="mb-4">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar producto o venta" (keyup)="buscar()">
+      <button class="btn btn-outline-secondary" type="button" (click)="limpiarBusqueda()">Limpiar</button>
+    </div>
+  </div>
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">Actividades Recientes</div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let actividad of actividadesRecientes">{{ actividad }}</li>
+    </ul>
+  </div>
+  <div class="text-center">
+    <a href="#" class="btn btn-outline-primary btn-lg mx-2" (click)="verReportes()">Ver Reportes</a>
+    <a href="#" class="btn btn-outline-secondary btn-lg mx-2" (click)="configuracion()">Configuración</a>
+  </div>
+</div>

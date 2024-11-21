@@ -1,31 +1,50 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { VentaService } from '../../services/venta.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detalleventa',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './detalleventa.component.html',
-  styleUrl: './detalleventa.component.css'
+  styleUrls: ['./detalleventa.component.css']
 })
 export class DetalleventaComponent {
   codigoVenta: string = '';
-    ventas: any[] = []; // Cambia el tipo según tu modelo de datos
+  ventas: any[] = [];
+  ventaDetalles: any = null;
 
-    constructor(private router: Router) {}
+  constructor(private router: Router, private ventaservice: VentaService, private toastr: ToastrService) { }
 
-    buscarVentas() {
-        // Aquí debes implementar la lógica para buscar ventas en tu backend
-        // Ejemplo simulado:
-        this.ventas = [
-            { id: 1, codigo: '001', total: 300, fecha: new Date(), vendedor: 'Juan Pérez' },
-            { id: 2, codigo: '002', total: 450, fecha: new Date(), vendedor: 'Ana Gómez' }
-        ].filter(venta => venta.codigo.includes(this.codigoVenta));
+  buscarVentas() {
+    const idventa = this.codigoVenta;
+
+    if (idventa === '' || idventa === null) {
+      this.toastr.error('Por favor ingresa un número de venta');
+    } else {
+      this.ventaservice.getventadetalle(parseInt(idventa)).subscribe({
+        next: (data) => {
+          console.log('Datos recibidos:', data);
+
+          if (data && data.venta && data.detalles) {
+
+            this.ventas = [data.venta];
+            this.ventaDetalles = data;
+
+
+            console.log('Detalles de la venta:', this.ventaDetalles);
+          } else {
+            this.toastr.error('No se encontraron detalles para esta venta.');
+          }
+        },
+        error: (err) => {
+          this.toastr.error('Hubo un error al obtener los detalles de la venta');
+        }
+      });
     }
+  }
 
-    verDetalles(ventaId: number) {
-        // Navegar al componente de detalles de la venta
-        this.router.navigate(['/detalles-venta', ventaId]);
-    }
 }

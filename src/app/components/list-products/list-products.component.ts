@@ -21,7 +21,7 @@ export class ListProductsComponent implements OnInit {
   listProducts: Product[] = [];
   loading: boolean = false;
   searchTerm: string = '';
-  searchCodigo: number = 0;
+  searchCodigo: string = '';
   searchReferencia: string = '';
 
 
@@ -35,7 +35,7 @@ export class ListProductsComponent implements OnInit {
       this.listProducts = state.products;
       console.log('Productos actualizados:', this.listProducts);
     } else {
-      this.getListProducts(); // Si no hay productos buscados, carga todos los productos
+      this.getListProducts();
     }
   }
 
@@ -56,44 +56,36 @@ export class ListProductsComponent implements OnInit {
     })
   }
 
-
-
-
-
-  // Método para actualizar la lista con los productos filtrados por nombre
   searchProductsName() {
     this.loading = true;
 
-    // Validar si el término de búsqueda está vacío
     if (this.searchTerm.trim() === '') {
 
       this.toastr.error('Ingresa el valor a buscar', ' busquedas vacias');
-      this.getListProducts(); // Si no hay búsqueda, mostrar todos los productos
+      this.getListProducts();
       this.loading = false;
       return;
     }
 
-    // Validar longitud mínima del término de búsqueda
+
     if (this.searchTerm.trim().length < 3) {
       this.toastr.warning('El término de búsqueda debe tener al menos 3 caracteres', 'Búsqueda demasiado corta');
       this.loading = false;
       return;
     }
 
-    // Si pasa las validaciones, realizar la búsqueda
+
     this.productService.searchProductsByName(this.searchTerm).subscribe({
       next: (data) => {
         if (data.products.length === 0) {
-          // Si no se encuentran productos
           this.toastr.info('No se encontraron productos con ese nombre', 'Sin resultados');
         } else {
-          this.listProducts = data.products; // Actualizar la lista de productos
+          this.listProducts = data.products;
         }
         this.loading = false;
       },
       error: (error) => {
         if (error.status === 404) {
-          // Manejar el error 404 que viene desde el backend
           this.toastr.error('No se encontraron productos con ese nombre', 'Sin resultados');
         } else {
           this.toastr.error('Ocurrió un error al buscar productos', 'Error');
@@ -103,7 +95,7 @@ export class ListProductsComponent implements OnInit {
     });
   }
 
-  //metodo para busqueda por codigo
+
   searchProductsCode() {
     this.loading = true;
     if (this.searchCodigo === undefined) {
@@ -113,18 +105,17 @@ export class ListProductsComponent implements OnInit {
       return;
     }
 
-    this.productService.searchProductsBycodigo(this.searchCodigo).subscribe({
+    this.productService.searchProductsBycodigo(parseInt(this.searchCodigo)).subscribe({
       next: (data) => {
         if (data.products.length === 0) {
           this.toastr.info('No se encontraron productos con ese código', 'Sin resultados');
-        }else{
+        } else {
           this.listProducts = data.products;
         }
         this.loading = false;
       },
       error: (error) => {
         if (error.status === 404) {
-          // Manejar el error 404 que viene desde el backend
           this.toastr.error('No se encontraron productos con ese Codigo', 'Sin resultados');
         } else {
           this.toastr.error('Ocurrió un error al buscar productos', 'Error');
@@ -134,7 +125,6 @@ export class ListProductsComponent implements OnInit {
     });
   }
 
-  //metodo para busqueda por referencia
   searchProductsReference() {
     this.loading = true;
     if (this.searchReferencia === '') {
@@ -148,14 +138,13 @@ export class ListProductsComponent implements OnInit {
       next: (data) => {
         if (data.products.length === 0) {
           this.toastr.info('No se encontraron productos con esa referenciaaaa', 'Sin resultados');
-          }else{
-            this.listProducts = data.products;
+        } else {
+          this.listProducts = data.products;
         }
         this.loading = false;
       },
       error: (error) => {
         if (error.status === 404) {
-          // Manejar el error 404 que viene desde el backend
           this.toastr.error('No se encontraron productos con esa referencia', 'Sin resultados');
         } else {
           this.toastr.error('Ocurrió un error al buscar productos', 'Error');
@@ -164,5 +153,5 @@ export class ListProductsComponent implements OnInit {
       }
     });
   }
-  
+
 }

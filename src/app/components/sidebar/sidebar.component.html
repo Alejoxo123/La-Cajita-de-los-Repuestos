@@ -1,22 +1,40 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" [opened]="isSidebarOpen">
-      <!-- Contenido de la barra lateral -->
-      <mat-nav-list>
-        <a mat-list-item routerLink="/home">Inicio</a>
-        <a mat-list-item routerLink="/productos">Productos</a>
-        <a mat-list-item routerLink="/puntoVenta">Punto de Venta</a>
-        <a mat-list-item routerLink="/detalleVenta">Detalle de Venta</a>
-        <a mat-list-item routerLink="/IngresarProductos">Ingresos</a>
-        <a mat-list-item routerLink="/contacto">Contacto</a>
-      </mat-nav-list>
-    </mat-sidenav>
-     <!-- Contenido principal -->
-     <mat-sidenav-content>
-      <div class="content">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
-   
-  
+    <mat-nav-list>
+      <a mat-list-item routerLink="">
+        <mat-icon style="margin-right: 8px;">home</mat-icon>
+        <span>Inicio</span>
+      </a>
+      <a mat-list-item routerLink="/productos">
+        <mat-icon style="margin-right: 8px;">inventory</mat-icon>
+        <span>Productos</span>
+      </a>
+      <a mat-list-item routerLink="/puntoVenta">
+        <mat-icon style="margin-right: 8px;">point_of_sale</mat-icon>
+        <span>Punto de Venta</span>
+      </a>
+      <a mat-list-item routerLink="/detalleVenta">
+        <mat-icon style="margin-right: 8px;">receipt</mat-icon>
+        <span>Detalle de Venta</span>
+      </a>
+      <a mat-list-item routerLink="/CrearProducto">
+        <mat-icon style="margin-right: 8px;">input</mat-icon>
+        <span>Crear Producto</span>
+      </a>
+      <a mat-list-item routerLink="/IngresarProductos">
+        <mat-icon style="margin-right: 8px;">input</mat-icon>
+        <span>Ingresar Productos</span>
+      </a>
+      <a mat-list-item routerLink="/IngresarProductos">
+        <mat-icon style="margin-right: 8px;">input</mat-icon>
+        <span>Crear Proveedor</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

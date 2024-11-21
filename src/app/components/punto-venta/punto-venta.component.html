@@ -1,60 +1,90 @@
-<div class="container mt-4">
-    <h2 class="text-center">Punto de Venta</h2>
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+
+<div class="container central-container mt-5 p-4">
+    <h2 class="text-center text-primary">Punto de Venta</h2>
+
+    <div class="form-group">
+        <label for="usuarioId" class="form-label text-info">Realizado Por</label>
+        <input type="text" id="usuarioId" class="form-control" [(ngModel)]="username" placeholder="Username">
+    </div>
 
     <div class="row mb-4">
         <div class="col-md-6">
-            <label for="fecha" class="form-label">Fecha</label>
-            <input type="date" class="form-control" id="fecha" required>
+            <label for="fecha" class="form-label text-info">Fecha</label>
+            <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" readonly>
         </div>
+
         <div class="col-md-6">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select class="form-select" id="cliente" required>
-                <option value="">Seleccione un cliente</option>
-                <option value="1">Cliente 1</option>
-                <option value="2">Cliente 2</option>
-                <option value="3">Cliente 3</option>
-            </select>
+            <label for="cliente" class="form-label text-info">Cliente</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="cliente" [(ngModel)]="searchCliente" required>
+                <button class="btn btn-primary" type="button" (click)="buscarCliente()">Añadir</button>
+            </div>
         </div>
     </div>
-  
-    <div class="row mb-4">
-      <div class="col-md-6 offset-md-3">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Ingrese el código del producto" [(ngModel)]="searchCodigo" required>
-          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="cantidadProducto" required>
-          <button class="btn btn-primary" type="button" (click)="agregarProducto()">Añadir</button>
-        </div>
-      </div>
-    </div>
-  
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Código</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Precio Unitario</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Precio Total</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let producto of listProducts">
-          <td>{{ producto.codigo }}</td>
-          <td>{{ producto.description }}</td>
-          <td>{{ producto.price | currency }}</td>
-          <td>{{ producto.cantidad }}</td>
-          <td>{{ producto.precioTotal | currency }}</td>
-          <td>
-            <button class="btn btn-danger" (click)="eliminarProducto(producto)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
+    <table class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Documento</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Email</th>
+                <th scope="col">Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of listClientes">
+                <td>{{ cliente.idclientes }}</td>
+                <td>{{ cliente.documento_identidad }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>{{ cliente.email }}</td>
+                <td>{{ cliente.direccion }}</td>
+            </tr>
+        </tbody>
     </table>
-  
-    <div class="d-flex justify-content-between">
-      <h5>Total de la Venta: <span>{{ totalVenta | currency }}</span></h5>
-      <button class="btn btn-success" type="button">Liquidar</button>
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Ingrese el código del producto"
+                    [(ngModel)]="searchCodigo" required>
+                <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="cantidadProducto"
+                    required>
+                <button class="btn btn-primary" type="button" (click)="agregarProducto()">Añadir</button>
+            </div>
+        </div>
     </div>
-  </div>
+    <table class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Total</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let producto of listProducts">
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.name }}</td>
+                <td>{{ producto.description }}</td>
+                <td>{{ producto.price | currency }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>{{ producto.precioTotal | currency }}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="eliminarProducto(producto)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h5 class="text-primary">Total de la Venta: <span>{{ totalVenta | currency }}</span></h5>
+        <button class="btn btn-success" type="button" (click)="liquidarVenta()">Liquidar</button>
+    </div>
+</div>
+
   
