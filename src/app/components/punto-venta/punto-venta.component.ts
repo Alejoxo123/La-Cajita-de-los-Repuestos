@@ -162,7 +162,8 @@ export class PuntoVentaComponent {
 
     this.ventaservice.crearVenta(ventaData).subscribe({
       next: (_response) => {
-        this.toastr.success('Venta liquidada con éxito', 'Venta exitosa');
+        console.log(_response);
+        this.toastr.success(`Venta liquidada con éxito. ID de la venta: ${_response.venta.id}`, 'Venta exitosa');
         this.listClientes = [];
         this.listProducts = [];
         this.totalVenta = 0;

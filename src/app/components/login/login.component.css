@@ -1,0 +1,99 @@
+/* Estilo general de la página */
+body {
+    background-color: #f8f9fa; /* Fondo gris suave (Minty) */
+    font-family: 'Arial', sans-serif;
+    color: #495057; /* Color gris oscuro para el texto */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Asegura que el body ocupe toda la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra todo vertical y horizontalmente */
+    overflow: hidden; /* Elimina cualquier barra de desplazamiento */
+  }
+  
+  /* Contenedor principal centrado */
+  .container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Toma toda la altura de la ventana */
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Card centrada */
+  .card {
+    background: #ffffff; /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%; /* Hace que la tarjeta ocupe todo el ancho disponible */
+    max-width: 380px; /* Limita el tamaño máximo de la tarjeta */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  /* Estilo para el header de la tarjeta */
+  .card-header {
+    background-color: #28a745; /* Verde Minty */
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 15px;
+  }
+  
+  .card-header h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .card-header h5 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #d1f7d2; /* Un verde más claro */
+  }
+  
+  /* Estilo para los inputs */
+  .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+  }
+  
+  .form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Sombra verde al hacer foco */
+  }
+  
+  /* Estilo para los botones */
+  .btn-success {
+    background-color: #28a745; /* Verde del tema Minty */
+    border-color: #28a745;
+    font-size: 1rem;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838; /* Verde más oscuro para hover */
+    border-color: #1e7e34;
+  }
+  
+  /* Estilo para los mensajes de error */
+  .text-danger {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  /* Ajustes para la vista móvil */
+  @media (max-width: 576px) {
+    .card {
+      padding: 15px;
+    }
+    .card-header h4 {
+      font-size: 1.1rem;
+    }
+    .card-header h5 {
+      font-size: 1rem;
+    }
+  }
+  

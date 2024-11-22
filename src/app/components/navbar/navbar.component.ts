@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class NavbarComponent {
   isAuthenticated$; // Declarar la propiedad primero
+  isAdmin: boolean = false;
+  role: string | null = '';
 
   // El constructor debe inicializar las dependencias en el orden correcto
   constructor(
@@ -24,6 +26,11 @@ export class NavbarComponent {
     private sidebarService: SidebarService
   ) {
     this.isAuthenticated$ = this.authService.isAuthenticated$; // Inicializamos la propiedad en el constructor
+  }
+  ngOnInit() {
+    this.authService.role$.subscribe(role => {
+      this.role = role; // Verifica si el rol es "admin"
+    });
   }
 
   // Método para alternar la barra lateral
@@ -36,4 +43,6 @@ export class NavbarComponent {
     this.authService.logout(); // Llamamos al método logout del AuthService
     this.router.navigate(['/']); // Redirigimos al login
   }
+
+  
 }
