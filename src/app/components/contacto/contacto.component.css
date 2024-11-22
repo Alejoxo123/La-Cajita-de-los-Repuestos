@@ -1,0 +1,46 @@
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .contact-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+  
+  .contact-container p {
+    margin-bottom: 30px;
+    color: #555;
+  }
+  
+  .contact-form mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .map-container {
+    margin-top: 30px;
+  }
+  
+  .map-container iframe {
+    border-radius: 10px;
+  }
+  
+  .social-media {
+    margin-top: 20px;
+  }
+  
+  .social-media a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+  
+  .social-media a:hover {
+    text-decoration: underline;
+  }
+  

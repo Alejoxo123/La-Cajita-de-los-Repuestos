@@ -1,0 +1,88 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container central-container mt-5 p-4">
+    <h4 class="text-center text-primary mb-4">Gestión de Clientes</h4>
+
+    <!-- Input de búsqueda -->
+    <div class="row mb-4 align-items-end">
+        <div class="col-md-6">
+            <form class="d-flex align-items-center" (submit)="searchClientes()">
+                <label for="documento-search" class="form-label text-info me-2">Documento</label>
+                <input class="form-control me-2" [(ngModel)]="searchTerm" name="search" type="search"
+                    placeholder="Buscar por documento">
+                <button class="btn btn-secondary" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de clientes -->
+    <table *ngIf="filteredClientes.length > 0" class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Documento</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of filteredClientes">
+                <td>{{ cliente.documento }}</td>
+                <td>{{ cliente.nombre }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>{{ cliente.correo }}</td>
+                <td>{{ cliente.direccion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h5 *ngIf="filteredClientes.length == 0" class="text-center text-danger mt-4">No se encontraron resultados</h5>
+
+    <!-- Botón para crear cliente -->
+    <div class="text-center mt-4">
+        <button class="btn btn-primary" (click)="abrirModal()">Crear Cliente</button>
+    </div>
+
+    <!-- Modal para crear cliente -->
+    <mat-dialog-container *ngIf="isModalOpen">
+        <div class="p-3">
+            <h4>Crear Cliente</h4>
+            <div class="form-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre"
+                    [(ngModel)]="nuevoCliente.nombre"
+                />
+                <input
+                    type="text"
+                    class="form-control mt-2"
+                    placeholder="Documento"
+                    [(ngModel)]="nuevoCliente.documento"
+                />
+                <input
+                    type="text"
+                    class="form-control mt-2"
+                    placeholder="Teléfono"
+                    [(ngModel)]="nuevoCliente.telefono"
+                />
+                <input
+                    type="email"
+                    class="form-control mt-2"
+                    placeholder="Correo"
+                    [(ngModel)]="nuevoCliente.correo"
+                />
+                <input
+                    type="text"
+                    class="form-control mt-2"
+                    placeholder="Dirección"
+                    [(ngModel)]="nuevoCliente.direccion"
+                />
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success mt-3" (click)="crearCliente()">Guardar</button>
+                <button class="btn btn-secondary mt-3" (click)="cerrarModal()">Cerrar</button>
+            </div>
+        </div>
+    </mat-dialog-container>
+</div>

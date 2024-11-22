@@ -1,0 +1,88 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="container central-container mt-5 p-4">
+    <h4 class="text-center text-primary mb-4">Gestión de Proveedores</h4>
+
+    <!-- Input de búsqueda -->
+    <div class="row mb-4 align-items-end">
+        <div class="col-md-6">
+            <form class="d-flex align-items-center" (submit)="searchProveedores()">
+                <label for="documento-search" class="form-label text-info me-2">Documento</label>
+                <input class="form-control me-2" [(ngModel)]="searchTerm" name="search" type="search"
+                    placeholder="Buscar por documento">
+                <button class="btn btn-secondary" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tabla de proveedores -->
+    <table *ngIf="filteredProveedores.length > 0" class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Documento</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let proveedor of filteredProveedores">
+                <td>{{ proveedor.documento }}</td>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.correo }}</td>
+                <td>{{ proveedor.direccion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h5 *ngIf="filteredProveedores.length == 0" class="text-center text-danger mt-4">No se encontraron resultados</h5>
+
+    <!-- Botón para crear proveedor -->
+    <div class="text-center mt-4">
+        <button class="btn btn-primary" (click)="abrirModal()">Crear Proveedor</button>
+    </div>
+
+    <!-- Modal para crear proveedor -->
+    <mat-dialog-container *ngIf="isModalOpen">
+        <div class="p-3">
+            <h4>Crear Proveedor</h4>
+            <div class="form-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre"
+                    [(ngModel)]="nuevoProveedor.nombre"
+                />
+                <input
+                    type="text"
+                    class="form-control mt-2"
+                    placeholder="Documento"
+                    [(ngModel)]="nuevoProveedor.documento"
+                />
+                <input
+                    type="text"
+                    class="form-control mt-2"
+                    placeholder="Teléfono"
+                    [(ngModel)]="nuevoProveedor.telefono"
+                />
+                <input
+                    type="email"
+                    class="form-control mt-2"
+                    placeholder="Correo"
+                    [(ngModel)]="nuevoProveedor.correo"
+                />
+                <input
+                    type="text"
+                    class="form-control mt-2"
+                    placeholder="Dirección"
+                    [(ngModel)]="nuevoProveedor.direccion"
+                />
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success mt-3" (click)="crearProveedor()">Guardar</button>
+                <button class="btn btn-secondary mt-3" (click)="cerrarModal()">Cerrar</button>
+            </div>
+        </div>
+    </mat-dialog-container>
+</div>

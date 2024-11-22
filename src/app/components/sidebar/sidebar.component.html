@@ -1,33 +1,42 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" [opened]="isSidebarOpen">
     <mat-nav-list>
-      <a mat-list-item routerLink="">
+      <br><br>
+      <a mat-list-item routerLink="inicio">
         <mat-icon style="margin-right: 8px;">home</mat-icon>
         <span>Inicio</span>
       </a>
-      <a mat-list-item routerLink="/productos">
+      <a mat-list-item routerLink="productos">
         <mat-icon style="margin-right: 8px;">inventory</mat-icon>
         <span>Productos</span>
       </a>
-      <a mat-list-item routerLink="/puntoVenta">
-        <mat-icon style="margin-right: 8px;">point_of_sale</mat-icon>
-        <span>Punto de Venta</span>
-      </a>
-      <a mat-list-item routerLink="/detalleVenta">
-        <mat-icon style="margin-right: 8px;">receipt</mat-icon>
-        <span>Detalle de Venta</span>
-      </a>
-      <a mat-list-item routerLink="/CrearProducto">
-        <mat-icon style="margin-right: 8px;">input</mat-icon>
-        <span>Crear Producto</span>
-      </a>
-      <a mat-list-item routerLink="/IngresarProductos">
+      <a mat-list-item routerLink="IngresarProductos" *ngIf="isAdmin">
         <mat-icon style="margin-right: 8px;">input</mat-icon>
         <span>Ingresar Productos</span>
       </a>
-      <a mat-list-item routerLink="/IngresarProductos">
+      <a mat-list-item routerLink="CrearProducto" *ngIf="isAdmin">
         <mat-icon style="margin-right: 8px;">input</mat-icon>
-        <span>Crear Proveedor</span>
+        <span>Crear Producto</span>
+      </a>
+      <a mat-list-item routerLink="puntoVenta">
+        <mat-icon style="margin-right: 8px;">point_of_sale</mat-icon>
+        <span>Punto de Venta</span>
+      </a>
+      <a mat-list-item routerLink="detalleVenta">
+        <mat-icon style="margin-right: 8px;">receipt</mat-icon>
+        <span>Detalle de Venta</span>
+      </a>
+      <a mat-list-item routerLink="Proveedores">
+        <mat-icon style="margin-right: 8px;">input</mat-icon>
+        <span>Proveedores</span>
+      </a>
+      <a mat-list-item routerLink="Clientes">
+        <mat-icon style="margin-right: 8px;">input</mat-icon>
+        <span>Clientes</span>
+      </a>
+      <a mat-list-item routerLink="Contacto">
+        <mat-icon style="margin-right: 8px;">input</mat-icon>
+        <span>Contacto</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>

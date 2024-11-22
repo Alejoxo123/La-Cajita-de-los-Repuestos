@@ -1,19 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { ListProductsComponent } from "./components/list-products/list-products.component";
-import { LoginComponent } from "./components/login/login.component";
+import { Router, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PuntoVentaComponent } from './components/punto-venta/punto-venta.component';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, ListProductsComponent, LoginComponent, SidebarComponent, PuntoVentaComponent],
+  imports: [RouterOutlet, NavbarComponent, SidebarComponent, CommonModule], // Solo importa lo necesario
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // Usa styleUrls en lugar de styleUrl (corrección ortográfica)
 })
 export class AppComponent {
   title = 'la_cajita_de_los_repuestos';
+
+  constructor(private router: Router) {}
+
+  shouldShowNavbar(): boolean {
+    // Retorna true si la URL actual no es '/login', ocultando el navbar en esa ruta
+    return this.router.url !== '/';
+  }
 }

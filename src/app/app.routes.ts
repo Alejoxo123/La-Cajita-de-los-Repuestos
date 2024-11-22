@@ -10,19 +10,24 @@ import { PuntoVentaComponent } from './components/punto-venta/punto-venta.compon
 import { DetalleventaComponent } from './components/detalleventa/detalleventa.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { IngresarProductosComponent } from './components/ingresar-productos/ingresar-productos.component';
+import { AuthGuard } from './guards/authguard.guard';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 
 export const routes: Routes = [
-    //{ path: '', component: LoginComponent }, 
-    //{path: '', component: NavbarComponent },
-    {path:'', component: InicioComponent},
-    {path:'productos', component: ListProductsComponent},
-    {path:'puntoVenta', component: PuntoVentaComponent},
-    {path:'detalleVenta', component: DetalleventaComponent},
-    {path:'CrearProducto', component: AddEditProductsComponent },
-    {path:'IngresarProductos', component: IngresarProductosComponent },
-    {path:'edit/:id', component: AddEditProductsComponent },
-    {path:'**', redirectTo: '', pathMatch:'full' }
+  { path: '', component: LoginComponent }, // Ruta de Login
+  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'productos', component: ListProductsComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'puntoVenta', component: PuntoVentaComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'detalleVenta', component: DetalleventaComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'CrearProducto', component: AddEditProductsComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'IngresarProductos', component: IngresarProductosComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'Proveedores', component: ProveedoresComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'Clientes', component: ClientesComponent, canActivate: [AuthGuard] }, // Protegemos con el guard
+  { path: 'Contacto', component: ContactoComponent, canActivate: [AuthGuard] }, // Protegemos con el guard 
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

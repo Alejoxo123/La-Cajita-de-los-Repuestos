@@ -6,6 +6,7 @@ import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.com
 import { ToastrService } from 'ngx-toastr';
 import { IngresosService } from '../../services/ingresos.service';
 import { ProductService } from '../../services/product.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-ingresar-productos',
@@ -24,12 +25,15 @@ export class IngresarProductosComponent {
   productosEncontrados: any[] = [];
   codigoProducto: string = '';
   listProducts: any;
+  
+  isAdmin: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private ingresosservice: IngresosService,
     private toastr: ToastrService,
-    private productoservice: ProductService
+    private productoservice: ProductService,
+    private authService: AuthService
   ) {
     this.facturaForm = this.fb.group({
       numeroFactura: ['', Validators.required],
@@ -40,6 +44,7 @@ export class IngresarProductosComponent {
       idProveedor: ['', Validators.required],
     });
   }
+  
 
   buscarProveedor() {
     if (this.searchDocumentProovedor.trim() === '') {
