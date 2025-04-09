@@ -17,5 +17,5 @@ Soy estudiante de Ingeniería de Software, actualmente en quinto semestre. Me es
 - [CRUD en Angular](https://github.com/Alejoxo123/Angular-CRUD) - Proyecto de Angular con operaciones CRUD.
 
 ### 📫 Contáctame
-- [LinkedIn](https://www.linkedin.com/in/alejandro)
-- [Correo](mailto:alejandro@example.com)
+- [LinkedIn]([https://www.linkedin.com/in/alejandro](https://www.linkedin.com/in/alejandro-castro-sanchez-939a4914a/))
+- [Correo](mailto:alejandrosocastrosanchez@gmail.com)
