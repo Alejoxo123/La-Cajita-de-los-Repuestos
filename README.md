@@ -1,7 +1,7 @@
 # ¡Hola, soy Alejandro! 👋
 
 ### 🚀 Desarrollador de Software en Formación
-Soy estudiante de Ingeniería de Software, actualmente en cuarto semestre. Me especializo en **Angular**, **Node.js**, **MySQL**, y estoy trabajando en proyectos interesantes como un sistema de control de inventario para 'Variedades Mile'. 
+Soy estudiante de Ingeniería de Software, actualmente en quinto semestre. Me especializo en **Angular**, **Node.js**, **MySQL**, y estoy trabajando en proyectos interesantes como un sistema de control de inventario para 'Variedades Mile'. 
 
 ### 🔧 Tecnologías y Herramientas
 - Frontend: ![Angular](https://img.shields.io/badge/-Angular-DD0031?logo=angular&logoColor=white)
